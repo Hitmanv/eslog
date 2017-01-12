@@ -1,0 +1,19 @@
+{
+    "name": "hitman/eslog",
+    "description": "log to elasticsearch",
+    "type": "library",
+    "require": {
+    	"elasticsearch/elasticsearch": "^2.3.0"
+    },
+    "autoload": {
+	   "psr-4": {
+    		"Hitman\\Elasticsearch\\": "src/"
+    	}
+    },
+    "authors": [
+        {
+            "name": "hitman",
+            "email": "944594252@qq.com"
+        }
+    ]
+}
