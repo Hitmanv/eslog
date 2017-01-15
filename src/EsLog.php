@@ -27,17 +27,17 @@ class EsLog
         return $this->client->index($params);
     }
 
-    public function eventLog($data)
+    public function event($data)
     {
         return $this->log('event', $data);
     }
 
-    public function errorLog($data)
+    public function error($data)
     {
         return $this->log('error', $data);
     }
 
-    public function debugLog($data)
+    public function info($data)
     {
         return $this->log('info', $data);
     }

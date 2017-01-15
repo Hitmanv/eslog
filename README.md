@@ -9,7 +9,10 @@ composer require hitman/eslog:dev-master
 ## 使用
 ### Step1 config/app.php 添加
 ```php
-Hitman\Elasticsearch\EsLogServiceProvider::class
+Hitman\Elasticsearch\EsLogServiceProvider::class,
+
+// 添加Facade
+'EsLog' => Hitman\Elasticsearch\Facade\EsLog::class,
 ```
 
 ### Step2 生成配置文件 config/es.php
@@ -28,9 +31,18 @@ return [
 
 ### Step4 使用
 ```php
-$eslog = resolve('eslog')
-$eslog->errorLog($data); // 错误日志记录
-$eslog->debugLog($data); // 调试日志记录
-$eslog->eventLog($data); // 事件日志记录
-$eslog->log($type, $data); // 自定义日志记录
+// 使用DI
+$eslog = resolve('eslog');
+$eslog->error($data);
+$eslog->info($data);
+$eslog->event($data);
+$eslog->log($type, $data); // 自定义类型日志
+
+## 使用Facade 
+use EsLog;
+EsLog::error($data);
+EsLog::info($data);
+EsLog::event($data);
+EsLog::log($type, $data); // 自定义类型日志
+
 ```
