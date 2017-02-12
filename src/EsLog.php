@@ -48,6 +48,6 @@ class EsLog
         $data = [];
         $data['message'] = get_class($ex) . ": " . $ex->getMessage();
         $data['trace'] = $ex->getTraceAsString();
-        return $this->error('error', $data);
+        return $this->error($data);
     }
 }
