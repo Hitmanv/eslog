@@ -36,6 +36,7 @@ $eslog = resolve('eslog');
 $eslog->error($data);
 $eslog->info($data);
 $eslog->event($data);
+$eslog->exception($exception);
 $eslog->log($type, $data); // 自定义类型日志
 
 ## 使用Facade 
@@ -43,6 +44,7 @@ use EsLog;
 EsLog::error($data);
 EsLog::info($data);
 EsLog::event($data);
+EsLog::exception($exception);
 EsLog::log($type, $data); // 自定义类型日志
 
 ```

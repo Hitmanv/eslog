@@ -3,6 +3,7 @@
 namespace Hitman\Elasticsearch;
 
 use Elasticsearch\ClientBuilder;
+use Exception;
 
 class EsLog
 {
@@ -40,5 +41,13 @@ class EsLog
     public function info($data)
     {
         return $this->log('info', $data);
+    }
+
+    public function exception(Exception $ex)
+    {
+        $data = [];
+        $data['message'] = get_class($ex) . ": " . $ex->getMessage();
+        $data['trace'] = $ex->getTraceAsString();
+        return $this->error('error', $data);
     }
 }
