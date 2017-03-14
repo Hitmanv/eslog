@@ -24,9 +24,15 @@ php artisan vendor:publish
 ```php
 <?php
 return [
-	'app' => config('app.name'), // 项目名称 用于标识项目
-	'hosts' => ['127.0.0.1'], // es 地址
+	'hosts' => ['127.0.0.1'],
+    'log' => [
+        'meta' => [
+            'index' => '', // 索引
+            'type' => '',  // 类型
+        ],
+    ],
 ];
+
 ```
 
 ### Step4 使用

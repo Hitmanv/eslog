@@ -14,16 +14,13 @@ class EsLog
 		$this->client = ClientBuilder::create()->setHosts(config('es.hosts'))->build();
 	}
 
-    public function log($type, $data)
+    public function log($logType, $data)
     {
         $data['timestamp'] = time() * 1000;
-        $data['app'] = config('es.app');
+        $data['log_type'] = $logType;
 
-        $params = [
-            'index' => 'log',
-            'type' => $type,
-            'body' => $data,
-        ];
+        $params = config('es.log.meta');
+        $params['body'] = $data;
 
         return $this->client->index($params);
     }
