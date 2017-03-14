@@ -28,8 +28,9 @@ class EsLog
         return $this->client->index($params);
     }
 
-    public function event($data)
+    public function event($event, $data)
     {
+        $data['event'] = $event;
         return $this->log('event', $data);
     }
 
