@@ -35,7 +35,7 @@ return [
 $eslog = resolve('eslog');
 $eslog->error($data);
 $eslog->info($data);
-$eslog->event($data);
+$eslog->event($event, $data);
 $eslog->exception($exception);
 $eslog->log($type, $data); // 自定义类型日志
 
@@ -43,7 +43,7 @@ $eslog->log($type, $data); // 自定义类型日志
 use EsLog;
 EsLog::error($data);
 EsLog::info($data);
-EsLog::event($data);
+EsLog::event($event, $data);
 EsLog::exception($exception);
 EsLog::log($type, $data); // 自定义类型日志
 
