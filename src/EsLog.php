@@ -21,8 +21,8 @@ class EsLog
         $data['log_type']  = $logType;
 
         $params          = [];
-        $params['index'] = 'log';
-        $params['type']  = 'test';
+        $params['index'] = config('eslog.index');
+        $params['type']  = config('eslog.type');
         $params['body']  = $data;
 
         if (config('eslog.async')) {

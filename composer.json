@@ -1,5 +1,5 @@
 {
-    "name": "hitman/eslog",
+    "name": "hitman/es-log",
     "description": "log to elasticsearch",
     "type": "library",
     "require": {
