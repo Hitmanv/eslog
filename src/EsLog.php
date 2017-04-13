@@ -4,48 +4,55 @@ namespace Hitman\Elasticsearch;
 
 use Elasticsearch\ClientBuilder;
 use Exception;
+use Hitman\Elasticsearch\Jobs\LogToEs;
 
 class EsLog
 {
-	protected $client;
+    protected $client;
 
-	public function __construct()
-	{
-		$this->client = ClientBuilder::create()->setHosts(config('es.hosts'))->build();
-	}
+    public function __construct()
+    {
+        $this->client = ClientBuilder::create()->setHosts(config('eslog.hosts'))->build();
+    }
 
     public function log($logType, $data)
     {
         $data['timestamp'] = time() * 1000;
-        $data['log_type'] = $logType;
+        $data['log_type']  = $logType;
 
-        $params = config('es.log.meta');
-        $params['body'] = $data;
+        $params          = [];
+        $params['index'] = 'log';
+        $params['type']  = 'test';
+        $params['body']  = $data;
 
-        return $this->client->index($params);
+        if (config('eslog.async')) {
+            dispatch((new LogToEs($params))->onQueue(config('eslog.queue'))); // 队列中执行
+        } else {
+            $this->client->index($params);
+        }
     }
 
     public function event($event, $data)
     {
         $data['event'] = $event;
-        return $this->log('event', $data);
+        $this->log('event', $data);
     }
 
     public function error($data)
     {
-        return $this->log('error', $data);
+        $this->log('error', $data);
     }
 
     public function info($data)
     {
-        return $this->log('info', $data);
+        $this->log('info', $data);
     }
 
     public function exception(Exception $ex)
     {
-        $data = [];
+        $data            = [];
         $data['message'] = get_class($ex) . ": " . $ex->getMessage();
-        $data['trace'] = $ex->getTraceAsString();
-        return $this->error($data);
+        $data['trace']   = $ex->getTraceAsString();
+        $this->error($data);
     }
 }
