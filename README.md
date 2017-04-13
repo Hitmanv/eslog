@@ -24,14 +24,13 @@ php artisan vendor:publish
 ```php
 <?php
 return [
-	'hosts' => ['127.0.0.1'],
-    'log' => [
-        'meta' => [
-            'index' => '', // 索引
-            'type' => '',  // 类型
-        ],
-    ],
+	'hosts' => ['127.0.0.1'], // elasticsearch 地址
+    'index' => 'log', // elasticsearch index
+    'type' => 'test', // elasticsearch type
+    'async' => true, // 是否使用队列异步上传日志
+    'queue' => 'default', // 日志对应的队列
 ];
+
 
 ```
 
@@ -52,5 +51,4 @@ EsLog::info($data);
 EsLog::event($event, $data);
 EsLog::exception($exception);
 EsLog::log($type, $data); // 自定义类型日志
-
 ```
