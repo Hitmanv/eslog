@@ -24,7 +24,7 @@ php artisan vendor:publish
 ```php
 <?php
 return [
-	'hosts' => ['127.0.0.1'], // elasticsearch 地址
+    'hosts' => ['127.0.0.1'], // elasticsearch 地址
     'index' => 'log', // elasticsearch index
     'type' => 'test', // elasticsearch type
     'async' => true, // 是否使用队列异步上传日志
