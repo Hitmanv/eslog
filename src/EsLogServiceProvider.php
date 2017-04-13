@@ -8,7 +8,7 @@ class EsLogServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishes([ __DIR__ . '/../config/es.php' => config_path('es.php') ]);
+        $this->publishes([ __DIR__ . '/../config/eslog.php' => config_path('eslog.php') ]);
     }
 
     public function register()
