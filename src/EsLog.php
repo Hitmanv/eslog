@@ -21,7 +21,7 @@ class EsLog
         if (config('eslog.async')) {
             dispatch((new LogToEs($params))->onQueue(config('eslog.queue'))); // 队列中执行
         } else {
-            $client = ClientBuilder::create()->setHosts(config('eslog.hosts'))->build()
+            $client = ClientBuilder::create()->setHosts(config('eslog.hosts'))->build();
             $client->index($params);
         }
     }
