@@ -8,13 +8,6 @@ use Hitman\Elasticsearch\Jobs\LogToEs;
 
 class EsLog
 {
-    protected $client;
-
-    public function __construct()
-    {
-        $this->client = ClientBuilder::create()->setHosts(config('eslog.hosts'))->build();
-    }
-
     public function log($logType, $data)
     {
         $data['timestamp'] = time() * 1000;
@@ -28,7 +21,8 @@ class EsLog
         if (config('eslog.async')) {
             dispatch((new LogToEs($params))->onQueue(config('eslog.queue'))); // 队列中执行
         } else {
-            $this->client->index($params);
+            $client = ClientBuilder::create()->setHosts(config('eslog.hosts'))->build()
+            $client->index($params);
         }
     }
 
