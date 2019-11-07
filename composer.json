@@ -3,7 +3,7 @@
     "description": "log to elasticsearch",
     "type": "library",
     "require": {
-    	"elasticsearch/elasticsearch": "^2.3.0"
+    	"elasticsearch/elasticsearch": "^7.3.0"
     },
     "autoload": {
 	   "psr-4": {
