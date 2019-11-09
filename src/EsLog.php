@@ -10,7 +10,7 @@ class EsLog
 {
     public function log($logType, $data)
     {
-        $data['timestamp'] = time() * 1000;
+        $data['@timestamp'] = date('Y-m-d H:i:s');
         $data['log_type']  = $logType;
 
         $params          = [];
